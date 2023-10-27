@@ -1,4 +1,3 @@
-# views.py trong Django
 from django.http import JsonResponse
 import requests
 
