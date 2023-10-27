@@ -5,8 +5,8 @@ from .serializers import ProductSerializer
 
 class ProductPagination(pagination.PageNumberPagination):
     page_size = 10
-    page_size_query_param = 'page_size'
-    page_query_param = 'page'
+    page_size_query_param = 'limit'
+    page_query_param = 'offset'
     max_page_size = 100
 
 class ProductViewSet(viewsets.ModelViewSet):
