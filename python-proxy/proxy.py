@@ -6,15 +6,15 @@ app = Flask(__name__)
 # Address of API Express
 API_EXPRESS_URL = "http://api-express:3000"
 
-@app.route("/", defaults={"path": ""})
 @app.route("/<path:path>", methods=["GET"])
-def proxy(path):
+def get_users(path):
     url = f"{API_EXPRESS_URL}/{path}"
     response = requests.request(
         method=request.method,
         url=url,
         data=request.data,
-        headers=request.headers
+        headers=request.headers,
+        params=request.args
     )
     return (response.text, response.status_code, response.headers.items())
 

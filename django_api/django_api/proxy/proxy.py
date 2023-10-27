@@ -3,7 +3,8 @@ import requests
 
 def get_users_from_proxy(request):
     proxy_url = "http://python-proxy:5000/users" 
-    response = requests.get(proxy_url)
+    query_params = request.GET
+    response = requests.get(proxy_url, params=query_params)
     users = response.json()
     return JsonResponse(users, safe=False)
 
