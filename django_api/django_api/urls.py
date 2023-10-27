@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from .proxy import proxy
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("products/", include("product.urls"), name="v1"),
+    path('users/', proxy.get_users_from_proxy, name='get_users'),
 ]
