@@ -7,7 +7,7 @@ app = Flask(__name__)
 API_EXPRESS_URL = "http://api-express:3000"
 
 @app.route("/", defaults={"path": ""})
-@app.route("/<path:path>", methods=["GET", "POST", "PUT", "DELETE"])
+@app.route("/<path:path>", methods=["GET"])
 def proxy(path):
     url = f"{API_EXPRESS_URL}/{path}"
     response = requests.request(
@@ -17,6 +17,14 @@ def proxy(path):
         headers=request.headers
     )
     return (response.text, response.status_code, response.headers.items())
+
+@app.route("/users/<int:user_id>", methods=["GET"])
+def get_user_by_id(user_id):
+    # Search ID
+    user_url = f"{API_EXPRESS_URL}/users/{user_id}"
+    response = requests.get(user_url)
+    return (response.text, response.status_code, response.headers.items())
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("products/", include("product.urls"), name="v1"),
     path('users/', proxy.get_users_from_proxy, name='get_users'),
+    path('users/<int:user_id>', proxy.get_detail_user_from_proxy, name='get_user_detail'),
 ]
