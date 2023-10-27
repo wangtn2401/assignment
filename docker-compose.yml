@@ -1,0 +1,37 @@
+version: '3'
+services:
+  api-express:
+    build:
+      context: ./api-express
+    ports:
+      - "3000:3000"
+    networks:
+      - mynetwork
+    volumes:
+      - ./api-express/database.sqlite:/app/database.sqlite
+
+  web-django:
+    build:
+      context: ./django_api
+    ports:
+      - "8000:8000"
+    networks:
+      - mynetwork
+    volumes:
+      - ./django_api/:/app
+    depends_on:
+      - api-express
+
+  python-proxy:
+    build:
+      context: ./python-proxy
+    networks:
+      - mynetwork
+    volumes:
+      - ./python-proxy/:/app
+    depends_on:
+      - api-express
+      - web-django
+
+networks:
+  mynetwork:
