@@ -16,8 +16,7 @@ curl --location 'http://127.0.0.1:3000/users/' \
 
 # 2/ Show list Users
 
-curl --location 'http://127.0.0.1:3000/users/'
-
+curl --location --request GET 'http://127.0.0.1:3000/users/?limit=10&offset=1'
 
 # 3/ Detail User with id
 

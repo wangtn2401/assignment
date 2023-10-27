@@ -36,11 +36,18 @@ app.post('/users', async (req, res) => {
 // Read all users
 app.get('/users', async (req, res) => {
     try {
-        const users = await User.findAll();
+        const limit = parseInt(req.query.limit) || 10;
+        const offset = parseInt(req.query.offset) || 0;
+        
+        const users = await User.findAll({
+            limit: limit,
+            offset: offset,
+        });
+
         res.json(users);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Unable to get user list' });
+        res.status(500).json({ error: 'Không thể lấy danh sách người dùng' });
     }
 });
 

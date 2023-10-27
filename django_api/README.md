@@ -10,8 +10,7 @@ curl --location 'http://127.0.0.1:8000/products/' \
 
 # 2/ Show list Product
 
-curl --location --request GET 'http://127.0.0.1:8000/products/' 
-
+curl --location --request GET 'http://127.0.0.1:8000/products/?page=1&page_size=10'
 
 # 3/ Detail Product with id
 
